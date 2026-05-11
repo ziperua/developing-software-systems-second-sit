@@ -6,10 +6,10 @@ from app.routers import auth
 #creating tables
 Base.metadata.create_all(bind=engine)
 
+app = FastAPI(title="Movie Watchlist API")
+
 #connect routers
 app.include_router(auth.router)
-
-app = FastAPI(title="Movie Watchlist API")
 
 #Cors - allows front to connect
 app.add_middleware(
