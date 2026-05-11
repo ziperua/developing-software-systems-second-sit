@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
+from app.routers import auth
 
 #creating tables
 Base.metadata.create_all(bind=engine)
+
+#connect routers
+app.include_router(auth.router)
 
 app = FastAPI(title="Movie Watchlist API")
 
