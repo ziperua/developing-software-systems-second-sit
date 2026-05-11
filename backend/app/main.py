@@ -1,15 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
-from app.routers import auth
+from app.routers import auth, watchlist
 
 #creating tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Movie Watchlist API")
-
-#connect routers
-app.include_router(auth.router)
 
 #Cors - allows front to connect
 app.add_middleware(
@@ -19,6 +16,10 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
+
+#connect routers
+app.include_router(auth.router)
+app.include_router(watchlist.router)
 
 @app.get("/")
 def root():
