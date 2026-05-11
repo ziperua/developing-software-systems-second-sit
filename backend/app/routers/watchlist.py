@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.models import WatchlistItem
-from app.schemas.watchlist import CreateWatchlistItemDto, UpdateWatchlistItem, WatchlistItemResponseDto
+from app.schemas.watchlist import CreateWatchlistItemDto, UpdateWatchlistItemDto, WatchlistItemResponseDto
 from app.routers.auth import get_current_user
 from app.models.models import ApplicationUser
 from datetime import datetime
@@ -31,9 +31,9 @@ def getWatchlistItems(current_user: ApplicationUser = Depends(get_current_user),
         updated_at= item.updated_at,
     ) for item in items]
 
-#create item
+#post item
 @router.post("")
-def createWatchistItem(data: CreateWatchlistItemDto,
+def postWatchistItem(data: CreateWatchlistItemDto,
     current_user: ApplicationUser = Depends(get_current_user),
     db: Session = Depends(get_db)):
 
@@ -68,6 +68,7 @@ def createWatchistItem(data: CreateWatchlistItemDto,
         updated_at = item.updated_at
     )
 
+#get item by id
 @router.get("/{item_id}")
 def getWatchlistItem(item_id: str,
     current_user: ApplicationUser = Depends(get_current_user),
@@ -94,9 +95,9 @@ def getWatchlistItem(item_id: str,
         updated_at = item.updated_at
     )
 
-#update item
+#put item
 @router.put("/{item_id}")
-def updateWatchlistItem(data: UpdateWatchlistItem,
+def putWatchlistItem(data: UpdateWatchlistItemDto,
     item_id : str,
     current_user: ApplicationUser = Depends(get_current_user),
     db: Session = Depends(get_db)):

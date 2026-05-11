@@ -11,7 +11,7 @@ class CreateWatchlistItemDto(BaseModel):
     rating: Optional[int] = None
     notes: Optional[str] = None
 
-class UpdateWatchlistItem(BaseModel):
+class UpdateWatchlistItemDto(BaseModel):
     title: str
     director: Optional[str] = None
     release_year: Optional[int] = None
