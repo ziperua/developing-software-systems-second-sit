@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Literal
 from datetime import datetime
 
 class CreateWatchlistItemDto(BaseModel):
@@ -7,7 +7,7 @@ class CreateWatchlistItemDto(BaseModel):
     director: Optional[str] = Field(default=None, max_length=80)
     release_year: Optional[int] = Field(default=None, ge=1888, le=2028)
     genre: Optional[str] = Field(default=None, max_length=40)
-    status: str
+    status: Literal["PlanToWatch", "Watching", "Watched", "Dropped"]
     rating: Optional[int] = Field(default=None, ge=1, le=10)
     notes: Optional[str] = Field(default=None, max_length=1000)
 
@@ -16,7 +16,7 @@ class UpdateWatchlistItemDto(BaseModel):
     director: Optional[str] = Field(default=None, max_length=80)
     release_year: Optional[int] = Field(default=None, ge=1888, le=2028)
     genre: Optional[str] = Field(default=None, max_length=40)
-    status: str
+    status: Literal["PlanToWatch", "Watching", "Watched", "Dropped"]
     rating: Optional[int] = Field(default=None, ge=1, le=10)
     notes: Optional[str] = Field(default=None, max_length=1000)
 
